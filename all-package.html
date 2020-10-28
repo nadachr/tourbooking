@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ระบบจองแพ็คเกจการท่องเที่ยวออนไลน์ | ตระกร้าการจอง</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+    <!-- Google fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,800&amp;display=swap">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+    <!-- navbar-->
+    <header class="header">
+      <nav class="navbar navbar-expand-lg fixed-top" style="position: relative;">
+        <div class="container">
+          <a class="navbar-brand" href="index.html" style="font-size: 30px;" id=""><b>ระบบจองแพ็คเกจการท่องเที่ยว</b></a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a class="nav-link link-scroll" href="index.html">หน้าแรก <span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="index.html#book">การจอง</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="payment.html">แจ้งชำระเงิน</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.html">เข้าสู่ระบบ</a></li>
+              <!--<li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="logout.html">ออกจากระบบ</a></li>-->
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- Menu Section-->
+    <section class="bg-light" id="rent" style="padding-top: 60px; padding-bottom: 50px;">
+      <div class="container">
+        <header class="mb-4 pb-4">
+          <h2 class="text-uppercase lined"><i class="fas fa-map-marked-alt fa-2x mb-4"></i> แพ็คเกจทัวร์ทั้งหมด</h2>
+        </header>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <a class="px-4 py-5 text-center contact-item shadow-sm d-block reset-anchor" href="#">
+              <h4 class="contact-item-title text-uppercase">ภาคกลาง</h4>
+              &nbsp;<span class="contact-item-title h2 text-success">12</span>
+              <h4 class="contact-item-title page-header mb-0"><small>แพ็คเกจ</small></h4>
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <a class="px-4 py-5 text-center contact-item shadow-sm d-block reset-anchor" href="#">
+              <h4 class="contact-item-title text-uppercase">ภาคใต้</h4>
+              &nbsp;<span class="contact-item-title h2 text-success">4</span>
+              <h4 class="contact-item-title page-header mb-0"><small>แพ็คเกจ</small></h4>
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <a class="px-4 py-5 text-center contact-item shadow-sm d-block reset-anchor" href="#">
+              <h4 class="contact-item-title text-uppercase">ภาคเหนือ</h4>
+              &nbsp;<span class="contact-item-title h2 text-success">11</span>
+              <h4 class="contact-item-title page-header mb-0"><small>แพ็คเกจ</small></h4>
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <a class="px-4 py-5 text-center contact-item shadow-sm d-block reset-anchor" href="#">
+              <h4 class="contact-item-title text-uppercase">ภาคอีสาน</h4>
+              &nbsp;<span class="contact-item-title h2 text-success">15</span>
+              <h4 class="contact-item-title page-header mb-0"><small>แพ็คเกจ</small></h4>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-md-8 mt-5">
+            <div class="input-group mb-2 mr-sm-2">
+              <input class="form-control" id="search" placeholder="ชื่อแพ็คเกจ หรือจังหวัดที่ต้องการ" type="text">
+              <div class="input-group-append">
+                <button class="btn btn-primary">ค้นหาแพ็คเกจ</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-light" style="padding-top: 0px;">
+      <div class="container">
+        <h5>ผลการค้นหาแพ็คเกจการท่องเที่ยว : <span class="text-success">"ทั้งหมด"</span> พบจำนวน 42 รายการ</h5>
+        <table class="table table-hover table-bordered">
+          <thead align="center">
+            <tr>
+              <th width="30%">รูปประกอบ</th>
+              <th width="35%">ชื่อแพ็คเกจ</th>
+              <th>วันเดินทาง</th>
+              <th>ราคา (บาท/คน)</th>
+              <th>ที่ว่าง (คน)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr align="center">
+              <td><a href="package.html"><img class="pack-list" src="img/bg.jpg" alt=""></a></td>
+              <td align="left">
+                <a href="package.html" class="text-dark">
+                  <h5>แพ็คเกจอะไรซักอย่าง</h5>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat porro numquam consequatur vitae! Vero consectetur hic magnam nostrum, enim, sunt minima, eveniet distinctio tempore voluptate molestiae qui perspiciatis quae autem!</p>
+                </a>
+              </td>
+              <td>dd/mm/yyyy</td>
+              <td class="h4">2,500</td>
+              <td>20</td>
+            </tr>
+            <tr align="center">
+              <td><a href="package.html"><img class="pack-list" src="img/bg.jpg" alt=""></a></td>
+              <td align="left">
+                <a href="package.html" class="text-dark">
+                  <h5>แพ็คเกจอะไรซักอย่าง</h5>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat porro numquam consequatur vitae! Vero consectetur hic magnam nostrum, enim, sunt minima, eveniet distinctio tempore voluptate molestiae qui perspiciatis quae autem!</p>
+                </a>
+              </td>
+              <td>dd/mm/yyyy</td>
+              <td class="h4">2,500</td>
+              <td>20</td>
+            </tr>
+            <tr align="center">
+              <td><a href="#"><img class="pack-list" src="img/bg.jpg" alt=""></a></td>
+              <td align="left">
+                <a href="#" class="text-dark">
+                  <h5>แพ็คเกจอะไรซักอย่าง</h5>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat porro numquam consequatur vitae! Vero consectetur hic magnam nostrum, enim, sunt minima, eveniet distinctio tempore voluptate molestiae qui perspiciatis quae autem!</p>
+                </a>
+              </td>
+              <td>dd/mm/yyyy</td>
+              <td class="h4">2,500</td>
+              <td>20</td>
+            </tr>
+          </tbody>
+        </table>
+        <nav aria-label="...">
+          <ul class="pagination">
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active"><span class="page-link">2<span class="sr-only">(current)</span></span></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+    <!-- Footer-->
+    <footer>
+      <div class="container text-center" style="padding: 20px;">
+        <h6 class="text-primary text-uppercase mb-0 letter-spacing-3" >สมาชิกในกลุ่ม</h6>
+      </div>
+      <div class="copyrights px-4">
+        <div class="container py-4 border-top text-center">
+          <p class="text-muted my-1">
+            - นางสาว -<br>
+            - นายจิรพงศ์ สงเนียม -<br>
+            - นางสาวนะดา เฉมเร๊ะ -<br>
+            - นายปฏิพล แปนแก้ว -
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/front.js"></script>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </body>
+</html>
