@@ -1,3 +1,37 @@
+<?php 
+
+session_start();
+  include 'condb.php';
+
+  if(isset($_GET['id'])){
+    $tourid = $_GET['id'];
+  }
+
+  $sql = "SELECT t.*,  p.*,  FORMAT(unitprice, 2) price, DATE_FORMAT(dateStart, '%d/%m/%Y') dstart, 
+  DATE_FORMAT(dateEnd, '%d/%m/%Y') dend, DATE_FORMAT(dateDue, '%d/%m/%Y') due,
+  numSeat - numBooking numFree
+  FROM `tbpacktour` t
+  INNER JOIN tbplanning p
+  ON p.ref_pktourid = t.pktourid
+  WHERE pktourid = $tourid";
+
+if($result = mysqli_query($con,$sql)){
+  foreach($result as $row){
+    $tourName = $row['pktourname'];
+    $detail = $row['pkdetail'];
+    $act = $row['activity'];
+    $price = $row['price'];
+    $include = $row['pkinclude'];
+    $notinc = $row['pknotinculde'];
+    $dateStart = $row['dstart'];
+    $dateEnd = $row['dend'];
+    $dateDue = $row['due'];
+    $numFree = $row['numFree'];
+    $img = $row['pkpicture'];
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,17 +59,20 @@
   <body>
     <!-- navbar-->
     <header class="header">
-      <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" style="position: relative;">
         <div class="container">
-          <a class="navbar-brand hide" href="#" style="font-size: 30px;"><b>ระบบจองแพ็คเกจการท่องเที่ยว</b></a>
+          <a class="navbar-brand" href="index.php" style="font-size: 30px;" id=""><b>ระบบจองแพ็คเกจการท่องเที่ยว</b></a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.html">หน้าแรก <span class="sr-only">(current)</span></a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.html#book">การจอง</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="payment.html">แจ้งชำระเงิน</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.html">เข้าสู่ระบบ</a></li>
-              <!--<li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="logout.html">ออกจากระบบ</a></li>-->
+              <li class="nav-item"><a class="nav-link link-scroll" href="index.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="index.php#book">การจอง</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="payment.php">แจ้งชำระเงิน</a></li>
+              <?php if($_SESSION['email'] != ''){ ?>
+              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="logout.php">ออกจากระบบ</a></li>
+              <?php }else{ ?>
+              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.php">เข้าสู่ระบบ</a></li>
+              <?php } ?>
             </ul>
           </div>
         </div>
@@ -50,24 +87,24 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="card mb-4" id="headling">
-              <h3 class="card-header">ชื่อแพ็คเกจ</h3>
+              <h3 class="card-header"><?= $tourName?></h3>
               <div class="card-body">
                 <div class="card-img">
-                  <img class="pack-img" src="img/bg_.jpg" alt="">
+                  <img class="pack-img" src="img\tour\<?= $img?>" alt="">
                 </div>
                 <div class="card-body">
                   <h4><i class="fas fa-route"></i>&nbsp; รายละเอียดการท่องเที่ยว </h4><hr>
-                  <p class="sug">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium autem saepe, quisquam eos quos harum voluptatem ad exercitationem nemo? Voluptatum libero nam assumenda laudantium? Delectus fuga obcaecati repudiandae harum corporis?</p>
+                  <p class="sug"><?= $detail?></p>
                   <h5>กิจกรรมตลอดแพ็คเกจ</h5>
-                  <p class="font-20">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, ex necessitatibus tenetur quasi similique voluptate cumque dolor a, alias fugit ipsa voluptatibus nobis aliquam, quos provident corporis natus itaque reprehenderit?</p>
+                  <p class="font-20"><?= $act?></p>
                   <h5>อัตราค่าบริการ</h5> 
-                  <li class="font-24">ราคาท่านละ <b>9,999</b> บาท</li>
+                  <li class="font-24">ราคาท่านละ <b><?= $price?></b> บาท</li>
                   <br>
                   <h5>อัตราค่าบริการนี้รวม</h5> 
-                  <li class="font-24">ค่าอาหาร / เครื่องดื่ม</li>
+                  <li class="font-24"><?= $include?></li>
                   <br>
                   <h5>อัตราค่าบริการนี้ไม่รวม</h5> 
-                  <li class="font-24">ค่าน้ำมันเครื่อง</li>
+                  <li class="font-24"><?= $notinc?></li>
                   <br>
                   <div class="row">
                     <table class="table table-bordered table-condensed" style="font-size: 20px;">
@@ -80,10 +117,14 @@
                       </thead>
                       <tbody align="center">
                         <tr>
-                          <td>dd/mm/yyyy - dd/mm/yyyy</td>
-                          <td>dd/mm/yyyy</td>
-                          <td>x</td>
-                          <td><button class="btn btn-success btn-lg">จองทัวร์นี้</button></td>
+                          <td><?= $dateStart?> - <?= $dateEnd?></td>
+                          <td><?= $dateDue?></td>
+                          <td><?= $numFree?></td>
+                          <?php if($_SESSION['email'] != ''){ ?>
+                          <td><a href="booking.php?id=<?=$tourid?>" class="btn btn-success btn-lg" onclick='return confirm("ต้องการจองแพ็คเกจการท่องเที่ยวนี้หรือไม่?");'>จองทัวร์นี้</a></td>
+                          <?php }else{ ?>
+                          <td><a href="login.php" class="btn btn-success btn-lg" onclick='alert("กรุณาเข้าสู่ระบบก่อนทำรายการ");'>จองทัวร์นี้</a></td>
+                          <?php } ?>
                         </tr>
                       </tbody>
                     </table>
@@ -93,7 +134,7 @@
             </div>
           </div>
         </div>
-        <a class="text-uppercase text-secondary" href="all-package.html"><b>ดูแพ็กเกจอื่น ๆ เพิ่มเติม</b></a>
+        <a class="text-uppercase text-secondary" href="all-package.php"><b>ดูแพ็กเกจอื่น ๆ เพิ่มเติม</b></a>
       </div>
     </section>
     <!-- Footer-->

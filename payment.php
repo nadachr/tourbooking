@@ -1,5 +1,9 @@
+<?php 
+  include 'auth.php';
+?>
+
 <!DOCTYPE html>
-<html>
+<php>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,10 +38,10 @@
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.html">หน้าแรก <span class="sr-only">(current)</span></a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.html#book">การจอง</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="payment.html">แจ้งชำระเงิน</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.html">เข้าสู่ระบบ</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="index.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="index.php#book">การจอง</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll active" href="payment.php">แจ้งชำระเงิน</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="logout.php">ออกจากระบบ</a></li>
             </ul>
           </div>
         </div>
@@ -51,7 +55,7 @@
             <h1 class="text-uppercase text-xl mt-5 mb-0">แจ้งชำระเงิน<span class="text-primary" style="font-size: 60px;">จองแพ็คเกจทัวร์</span></h1>
             <h2 class="h4 text-primary font-weight-normal mb-0">Payment Notification</h2>
             <br>
-            <a href="cart-list.html" class="btn btn-lg btn-outline-primary link-scroll"><i class="fas fa-cart-arrow-down"></i> <b>ตระกร้าจองแพ็คเกจ</b></a>
+            <a href="cart-list.php" class="btn btn-lg btn-outline-primary link-scroll"><i class="fas fa-cart-arrow-down"></i> <b>ตระกร้าจองแพ็คเกจ</b></a>
           </div>
           <div class="col-lg-6">
             <div class="card" id="forms">

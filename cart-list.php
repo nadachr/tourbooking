@@ -1,3 +1,7 @@
+<?php 
+  include 'auth.php';
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -34,8 +38,7 @@
               <li class="nav-item"><a class="nav-link link-scroll" href="index.html">หน้าแรก <span class="sr-only">(current)</span></a></li>
               <li class="nav-item"><a class="nav-link link-scroll" href="index.html#book">การจอง</a></li>
               <li class="nav-item"><a class="nav-link link-scroll" href="payment.html">แจ้งชำระเงิน</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.html">เข้าสู่ระบบ</a></li>
-              <!--<li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="logout.html">ออกจากระบบ</a></li>-->
+              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="logout.php">ออกจากระบบ</a></li>
             </ul>
           </div>
         </div>

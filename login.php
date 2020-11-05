@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<php>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,10 +34,10 @@
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.html">หน้าแรก <span class="sr-only">(current)</span></a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.html#book">การจอง</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="payment.html">แจ้งชำระเงิน</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.html">เข้าสู่ระบบ</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="index.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="index.php#book">การจอง</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll" href="payment.php">แจ้งชำระเงิน</a></li>
+              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.php">เข้าสู่ระบบ</a></li>
             </ul>
           </div>
         </div>
@@ -57,18 +57,18 @@
             <div class="card" id="forms">
               <div class="card-header" align="center"><legend>เข้าสู่ระบบ</legend></div>
               <div class="card-body">
-                <form>
+                <form action="check-login.php" method="POST">
                   <fieldset>
                     <div class="form-group">
                       <label for="exampleInputEmail">Email</label>
-                      <input class="form-control" id="exampleInputEmail" type="email" placeholder="Enter email" required>
+                      <input class="form-control" id="exampleInputEmail" type="email" name="email" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword">Password</label>
-                      <input class="form-control" id="exampleInputPassword" type="password" placeholder="Password" required>
+                      <input class="form-control" id="exampleInputPassword" type="password" name="pass" placeholder="Password" required>
                     </div>
                     <div class="col" align="center">
-                      <button class="btn btn-primary btn-lg" type="submit"><b>LOGIN</b></button>
+                      <button class="btn btn-primary btn-lg" type="submit" name="login"><b>LOGIN</b></button>
                     </div>
                   </fieldset>
                 </form>
@@ -87,7 +87,7 @@
         <div class="row">
           <div class="col-2"></div>
           <div class="col-8">
-            <form action="">
+            <form action="" method="">
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label" for="inputEmail3">อีเมล</label>
                 <div class="col-sm-9">
