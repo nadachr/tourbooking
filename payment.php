@@ -1,5 +1,11 @@
 <?php 
   include 'auth.php';
+
+  if(isset($_GET['id'])){
+    $bookid = $_GET['id'];
+  }else{
+    $bookid = null;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +47,16 @@
               <li class="nav-item"><a class="nav-link link-scroll" href="index.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
               <li class="nav-item"><a class="nav-link link-scroll" href="index.php#book">การจอง</a></li>
               <li class="nav-item"><a class="nav-link link-scroll active" href="payment.php">แจ้งชำระเงิน</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="logout.php">ออกจากระบบ</a></li>
+              <li class="nav-item">
+                <div class="dropdown show">
+                  <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?= $_SESSION['email'];?>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -61,27 +76,37 @@
             <div class="card" id="forms">
               <div class="card-header" align="center"><legend>หลักฐานการชำระเงิน</legend></div>
               <div class="card-body">
-                <form>
-                  <fieldset>
+                <form method="POST" action="pay.php" enctype="multipart/form-data">
+                <fieldset>
                     <div class="form-group">
-                      <label for="exampleInputEmail">หมายเลขการจอง : <span class="h5" style="color: #fbd214;">0001</span></label>
+                      <?php if($bookid != NULL){ ?>
+                      <label for="exampleInputEmail">หมายเลขการจอง : <span class="h4 pl-3" style="color: #fbd214;">#<?=$bookid?></span></label>
+                      <input class="form-control" id="bookid" name="bookid" type="text" value="<?= $bookid?>" hidden>
+                      <?php }else{ ?>
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">หมายเลขการจอง :</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" id="bookid" name="bookid" type="text" placeholder="####" required>
+                        </div>
+                      </div>
+                      <?php } ?>
                     </div>
                     <div class="form-group row">
                       <label class="col-sm-4 col-form-label">วันที่ชำระเงิน</label>
                       <div class="col-sm-3">
-                        <input id="datepicker" width="233" />
+                        <input id="datepicker" name="date" width="233" />
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-sm-4 col-form-label">เวลาที่ชำระเงิน</label>
                       <div class="col-sm-8">
-                        <input class="form-control" id="exampleInputtext" type="text" placeholder="hh:mm" required>
+                        <input class="form-control" id="time" name="time" type="time" placeholder="hh:mm" required>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-sm-4 col-form-label">ธนาคารที่ชำระเงิน</label>
                       <div class="col-sm-8">
-                        <select class="custom-select">
+                        <select class="custom-select" name="bank">
                           <option selected>เลือกธนาคารที่ชำระเงิน</option>
                           <option value="1">กรุงไทย</option>
                           <option value="2">กรุงศรี</option>
@@ -94,20 +119,21 @@
                     <div class="form-group row">
                       <label class="col-sm-4 col-form-label">จำนวนเงินที่ชำระ</label>
                       <div class="col-sm-8">
-                        <input class="form-control" id="exampleInputtext" type="text" placeholder="บาท" required>
+                        <input class="form-control" id="amount" name="amount" type="text" placeholder="บาท" required>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-sm-4 col-form-label">หลักฐานการชำระเงิน</label>
                       <div class="col-sm-8">
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="customFile">
-                          <label class="custom-file-label" for="customFile">เลือกรูปใบเสร็จ</label>
+                          <!-- <input type="file" class="form-control-file" name="file" id="customFile"> -->
+                          <input type="file" class="custom-file-input" name="customFile" id="customFile">
+                          <label class="custom-file-label" for="customFile" name="customFile" id="file"></label>
                         </div>
                       </div>
                     </div>
                     <div class="col" align="center">
-                      <button class="btn btn-primary btn-lg" type="submit"><b>ยืนยัน</b></button>
+                      <button class="btn btn-primary btn-lg" type="submit" name="paid" onclick="return confirm('ยืนยันการแจ้งชำระเงิน')"><b>ยืนยัน</b></button>
                     </div>
                   </fieldset>
                 </form>
@@ -117,17 +143,18 @@
         </div>
       </div>
     </section>
+    <!-- Footer-->
     <footer>
       <div class="container text-center" style="padding: 20px;">
-        <h6 class="text-primary text-uppercase mb-0 letter-spacing-3" >สมาชิกในกลุ่ม</h6>
+        <h6 class="text-primary text-uppercase mb-0 letter-spacing-3">สมาชิกในกลุ่ม</h6>
       </div>
       <div class="copyrights px-4">
         <div class="container py-4 border-top text-center">
           <p class="text-muted my-1">
-            - นางสาว -<br>
-            - นายจิรพงศ์ สงเนียม -<br>
-            - นางสาวนะดา เฉมเร๊ะ -<br>
-            - นายปฏิพล แปนแก้ว -
+            - นางสาศศิธร รักวิจิตร 159404140040 -<br>
+            - นายจิรพงศ์ สงเนียม 161404140014 -<br>
+            - นางสาวนะดา เฉมเร๊ะ 161404140022 -<br>
+            - นายปฏิพล แปนแก้ว 161404140025 -
           </p>
         </div>
       </div>
@@ -144,6 +171,16 @@
       $('#datepicker').datepicker({
           uiLibrary: 'bootstrap4'
       });
+    </script>
+    <script>
+      var filename = document.getElementById('file');
+      var upload = document.getElementById('customFile');
+      
+      upload.addEventListener("change", ()=>{
+        var name = upload.value.substring(12, upload.value.length);
+        console.log(name);
+        filename.innerHTML = name;
+      })
     </script>
   </body>
 </html>

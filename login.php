@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <php>
   <head>
@@ -59,6 +63,14 @@
               <div class="card-body">
                 <form action="check-login.php" method="POST">
                   <fieldset>
+                            <!-- แสดงเมื่อเพิ่มข้อมูลสำเร็จ -->
+                    <?php if(isset($_SESSION['success'])) : ?>
+                      <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <?php echo $_SESSION['success'];
+                              unset($_SESSION['success']); ?>
+                      </div>
+                    <?php endif ?>
                     <div class="form-group">
                       <label for="exampleInputEmail">Email</label>
                       <input class="form-control" id="exampleInputEmail" type="email" name="email" placeholder="Enter email" required>
@@ -78,53 +90,89 @@
         </div>
       </div>
     </section>
-    <!-- Menu Section-->
+    <!-- Registrator Section-->
     <section class="bg-light" id="regis" style="padding-top: 60px;">
       <div class="container">
+        <!-- แสดงเมื่อ input password ไม่ตรงกัน -->
+        <?php if(isset($_SESSION['pwd_not_match'])) : ?>
+          <div class="pwd_not_match">
+            <h5 style="color: red;">
+              <?php echo $_SESSION['pwd_not_match'];
+                    unset($_SESSION['pwd_not_match']); ?>
+            </h5>
+          </div>
+        <?php endif ?>
+
+        <!-- แสดงเมื่อEmail ที่input มีอยู่ในฐานข้อมูลแล้ว -->
+        <?php if(isset($_SESSION['email_already'])) : ?>
+          <div class="email_already">
+            <h5 style="color: red;">
+              <?php echo $_SESSION['email_already'];
+                    unset($_SESSION['email_already']); ?>
+            </h5>
+          </div>
+        <?php endif ?>
+
+        <!-- Register -->
         <header class="mb-4 pb-4">
           <h2 class="text-uppercase lined"><i class="fas fa-user"></i> สมัครสมาชิก</h2>
         </header>
         <div class="row">
           <div class="col-2"></div>
           <div class="col-8">
-            <form action="" method="">
+
+            <!-- ACTION -->
+            <form action="register.php" method="POST">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" for="inputEmail3">อีเมล</label>
+                <label class="col-sm-3 col-form-label" for="inputEmail">อีเมล</label>
                 <div class="col-sm-9">
-                  <input class="form-control" id="inputEmail3" type="email" placeholder="Email">
+
+                  <!-- GET Email -->
+                  <input class="form-control" id="inputEmail" name="inputEmail" type="email" placeholder="Email" required>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" for="inputPassword3">รหัสผ่าน</label>
+                <label class="col-sm-3 col-form-label" for="inputPassword1">รหัสผ่าน</label>
                 <div class="col-sm-9">
-                  <input class="form-control" id="inputPassword3" type="password" placeholder="Password">
+
+                  <!-- GET Password -->
+                  <input class="form-control" id="inputPassword" name="inputPassword1" type="password" placeholder="Password" required>
                   <small><code>*รหัสผ่านจะต้องประกอบไปด้วยตัวอักษรภาษาอังกฤษ และตัวเลขอย่างน้อย 8 อักขระ</code></small>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" for="inputPassword3">รหัสผ่านอีกครั้ง</label>
+                <label class="col-sm-3 col-form-label" for="inputPassword2">รหัสผ่านอีกครั้ง</label>
                 <div class="col-sm-9">
-                  <input class="form-control" id="inputPassword3" type="password" placeholder="Password">
+
+                  <!-- Password Again -->
+                  <input class="form-control" id="inputRePassword" name="inputPassword2" type="password" placeholder="Password" required>
                 </div>
               </div>
               <br><hr>
               <h5 class="lined">ข้อมูลส่วนตัว</h5>
               <br><br>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" for="inputEmail3">ชื่อ-สกุล</label>
+                <label class="col-sm-3 col-form-label" for="inputFname">ชื่อ-สกุล</label>
                 <div class="col-sm-4">
-                  <input class="form-control" id="inputEmail3" type="text" placeholder="First Name">
+
+                  <!-- GET First name -->
+                  <input class="form-control" id="inputFname" name="inputFname" type="text" placeholder="First Name" required>
                 </div>
                 <div class="col-sm-4">
-                  <input class="form-control" id="inputEmail3" type="text" placeholder="Last Name">
+
+                  <!-- GET Last name -->
+                  <input class="form-control" id="inputLname" name="inputLname" type="text" placeholder="Last Name" required>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" for="inputEmail3">เพศ</label>
+                <label class="col-sm-3 col-form-label" for="Gender">เพศ</label>
                 <div class="col-sm-2">
                   <div class="dropdown">
-                    <select class="form-control" name="" id="">
-                      <option value="">เพศ</option>
+
+                    <!-- GET Gender -->
+                    <select class="form-control" name="gender" id="Gender" required>
+                      <option value="ชาย">ชาย</option>
+                      <option value="หญิง">หญิง</option>
                     </select>
                   </div>
                 </div>
@@ -132,24 +180,31 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">วันเกิด</label>
                 <div class="col-sm-3">
-                  <input id="datepicker" width="220" />
+
+                  <!-- GET Birthdate -->
+                  <input id="datepicker" name="birthdate" width="220" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" for="inputEmail3">เลขประจำตัวประชาชน</label>
+                <label class="col-sm-3 col-form-label" for="inputID">เลขประจำตัวประชาชน</label>
                 <div class="col-sm-9">
-                  <input class="form-control" id="inputEmail3" type="tel" placeholder="13 หลัก">
+
+                  <!-- GET ID number -->
+                  <input class="form-control" id="inputID" name="inputID" type="tel" placeholder="13 หลัก" required>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label" for="inputEmail3">ที่อยู่</label>
                 <div class="col-sm-9">
-                  <input class="form-control" id="inputEmail3" type="text" placeholder="บ้านเลขที่ หมู่ที่ ตรอก/ซอย ถนน ตำบล อำเภอ จังหวัด">
+
+                  <!-- GET Adress -->
+                  <input class="form-control" id="inputAdress" name="inputAdress" type="text" placeholder="บ้านเลขที่ หมู่ที่ ตรอก/ซอย ถนน ตำบล อำเภอ จังหวัด">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-12 pt-3" align="center">
-                  <button class="btn btn-success btn-lg" type="submit"><b>ยืนยันการสมัคร</b></button>
+                  <!-- Submit -->
+                  <button class="btn btn-success btn-lg" type="submit" name="regis" onclick="return confirm('ยืนยันการสมัครสมาชิก')"><b>ยืนยันการสมัคร</b></button>
                 </div>
               </div>
             </form>
@@ -157,17 +212,19 @@
         </div>
       </div>
     </section>
+
+    <!-- Footer-->
     <footer>
       <div class="container text-center" style="padding: 20px;">
-        <h6 class="text-primary text-uppercase mb-0 letter-spacing-3" >สมาชิกในกลุ่ม</h6>
+        <h6 class="text-primary text-uppercase mb-0 letter-spacing-3">สมาชิกในกลุ่ม</h6>
       </div>
       <div class="copyrights px-4">
         <div class="container py-4 border-top text-center">
           <p class="text-muted my-1">
-            - นางสาว -<br>
-            - นายจิรพงศ์ สงเนียม -<br>
-            - นางสาวนะดา เฉมเร๊ะ -<br>
-            - นายปฏิพล แปนแก้ว -
+            - นางสาศศิธร รักวิจิตร 159404140040 -<br>
+            - นายจิรพงศ์ สงเนียม 161404140014 -<br>
+            - นางสาวนะดา เฉมเร๊ะ 161404140022 -<br>
+            - นายปฏิพล แปนแก้ว 161404140025 -
           </p>
         </div>
       </div>

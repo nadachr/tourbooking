@@ -53,7 +53,7 @@ function tourShow($sectid, $kw){
 
 ?>
 <!DOCTYPE html>
-<php>
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -89,7 +89,16 @@ function tourShow($sectid, $kw){
               <li class="nav-item"><a class="nav-link link-scroll" href="index.php#book">การจอง</a></li>
               <li class="nav-item"><a class="nav-link link-scroll" href="payment.php">แจ้งชำระเงิน</a></li>
               <?php if($_SESSION['email'] != ''){ ?>
-              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="logout.php">ออกจากระบบ</a></li>
+                <li class="nav-item">
+                  <div class="dropdown show">
+                    <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <?= $_SESSION['email'];?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
+                    </div>
+                  </div>
+                </li>
               <?php }else{ ?>
               <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.php">เข้าสู่ระบบ</a></li>
               <?php } ?>
@@ -179,29 +188,20 @@ function tourShow($sectid, $kw){
             <?php } ?>
           </tbody>
         </table>
-        <!-- <nav aria-label="...">
-          <ul class="pagination">
-            <li class="page-item disabled"><span class="page-link">Previous</span></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><span class="page-link">2<span class="sr-only">(current)</span></span></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-        </nav> -->
       </div>
     </section>
     <!-- Footer-->
     <footer>
       <div class="container text-center" style="padding: 20px;">
-        <h6 class="text-primary text-uppercase mb-0 letter-spacing-3" >สมาชิกในกลุ่ม</h6>
+        <h6 class="text-primary text-uppercase mb-0 letter-spacing-3">สมาชิกในกลุ่ม</h6>
       </div>
       <div class="copyrights px-4">
         <div class="container py-4 border-top text-center">
           <p class="text-muted my-1">
-            - นางสาว -<br>
-            - นายจิรพงศ์ สงเนียม -<br>
-            - นางสาวนะดา เฉมเร๊ะ -<br>
-            - นายปฏิพล แปนแก้ว -
+            - นางสาศศิธร รักวิจิตร 159404140040 -<br>
+            - นายจิรพงศ์ สงเนียม 161404140014 -<br>
+            - นางสาวนะดา เฉมเร๊ะ 161404140022 -<br>
+            - นายปฏิพล แปนแก้ว 161404140025 -
           </p>
         </div>
       </div>
