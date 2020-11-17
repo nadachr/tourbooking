@@ -107,6 +107,10 @@ li.timeline-item::before {
   color: #fff;
 }
 
+.contact-item.admin:hover{
+  background: #003B49;
+}
+
 .contact-item:hover i, .contact-item:hover .contact-item-title, .contact-item:hover p {
   color: #fff;
 }
@@ -150,9 +154,26 @@ a.contact-item .contact-item-title, a.contact-item p {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
+.navbar.admin {
+  transition: all 0.3s;
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+  background: #fbd214;
+}
+
+.navbar.admin.active {
+  background: #fbd214;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 991.98px) {
   .navbar {
-    background: #fff;
+    background: #003B49;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar.admin {
+    background: #fbd214;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   }
 }
@@ -2785,8 +2806,16 @@ code {
   transition: all 0.3s;
 }
 
+.nav-link.admin{
+  color: #003B49;
+}
+
 .nav-link.disabled {
   color: #6c757d;
+}
+
+.nav-link.admin.active, .nav-link.admin:hover, .nav-link.admin:focus {
+  color: #7c0000;
 }
 
 .nav-link.active, .nav-link:hover, .nav-link:focus {

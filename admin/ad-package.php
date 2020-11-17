@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-  include 'condb.php';
+  include '../condb.php';
 
   if(isset($_GET['id'])){
     $tourid = $_GET['id'];
@@ -26,6 +26,7 @@ if($result = mysqli_query($con,$sql)){
     $dateStart = $row['dstart'];
     $dateEnd = $row['dend'];
     $dateDue = $row['due'];
+    $numBook = $row['numBooking'];
     $numFree = $row['numFree'];
     $img = $row['pkpicture'];
   }
@@ -42,15 +43,15 @@ if($result = mysqli_query($con,$sql)){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css">
     <!-- Google fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,800&amp;display=swap">
+    <link rel="stylesheet" href="../https://fonts.googleapis.com/css?family=Work+Sans:300,400,800&amp;display=swap">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="../css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/icon.png">
+    <link rel="shortcut icon" href="../img/icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -59,35 +60,21 @@ if($result = mysqli_query($con,$sql)){
   <body>
     <!-- navbar-->
     <header class="header">
-    <nav class="navbar navbar-expand-lg" style="position: relative;">
+      <nav class="navbar navbar-expand-lg fixed-top" style="position: relative;">
         <div class="container">
-          <a class="navbar-brand" href="index.php" style="font-size: 30px;" id=""><b>ระบบจองแพ็คเกจการท่องเที่ยว</b></a>
+          <a class="navbar-brand" href="ad-all-package.php" style="font-size: 30px; color:#fbd214;" id=""><b>การจัดการระบบจองแพ็คเกจการท่องเที่ยว</b></a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.php#book">การจอง</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="payment.php">แจ้งชำระเงิน</a></li>
-              <?php if($_SESSION['email'] != '' && $_SESSION['admin'] == false){ ?>
+              <li class="nav-item"><a class="nav-link link-scroll active" href="ad-all-package.php">จัดการแพ็คเกจ <span class="sr-only">(current)</span></a></li>
+              <?php if($_SESSION['email'] != ''){ ?>
                 <li class="nav-item">
                   <div class="dropdown show">
-                    <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <?= $_SESSION['email'];?>
+                    <button class="nav-link link-scroll btn btn-secondary dropdown-toggle" style="color: #fbd214;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      administrator
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
-                    </div>
-                  </div>
-                </li>
-              <?php }else if($_SESSION['email'] != '' && $_SESSION['admin'] == true){ ?>
-                <li class="nav-item">
-                  <div class="dropdown show">
-                    <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <?= $_SESSION['email'];?>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="admin/ad-all-package.php"><strong>ADMIN PANEL</strong></a>
-                      <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
+                      <a class="dropdown-item" href="../logout.php">ออกจากระบบ</a>
                     </div>
                   </div>
                 </li>
@@ -111,7 +98,7 @@ if($result = mysqli_query($con,$sql)){
               <h3 class="card-header"><?= $tourName?></h3>
               <div class="card-body">
                 <div class="card-img">
-                  <img class="pack-img" src="img\tour\<?= $img?>" alt="">
+                  <img class="pack-img" src="../img/tour/<?= $img?>" alt="">
                 </div>
                 <div class="card-body">
                   <h4><i class="fas fa-route"></i>&nbsp; รายละเอียดการท่องเที่ยว </h4><hr>
@@ -134,6 +121,7 @@ if($result = mysqli_query($con,$sql)){
                           <th>วันเดินทาง</th>
                           <th>วันปิดจอง</th>
                           <th>จำนวนที่ว่าง (คน)</th>
+                          <th>จำนวนการจอง (คน)</th>
                         </tr>
                       </thead>
                       <tbody align="center">
@@ -141,21 +129,22 @@ if($result = mysqli_query($con,$sql)){
                           <td><?= $dateStart?> - <?= $dateEnd?></td>
                           <td><?= $dateDue?></td>
                           <td><?= $numFree?></td>
-                          <?php if($_SESSION['email'] != ''){ ?>
-                          <td><a href="booking.php?id=<?=$tourid?>" class="btn btn-success btn-lg" onclick='return confirm("ต้องการจองแพ็คเกจการท่องเที่ยวนี้หรือไม่?");'>จองทัวร์นี้</a></td>
-                          <?php }else{ ?>
-                          <td><a href="login.php" class="btn btn-success btn-lg" onclick='alert("กรุณาเข้าสู่ระบบก่อนทำรายการ");'>จองทัวร์นี้</a></td>
-                          <?php } ?>
+                          <td><?= $numBook?></td>
                         </tr>
                       </tbody>
                     </table>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12" align="center">
+                    <a href="ad-add-package.php?id=<?= $tourid?>" class="btn btn-warning font-weight-bold"><i class="fas fa-edit"></i> แก้ไขรายละเอียดของแพ็คเกจ</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <a class="text-uppercase text-secondary" href="all-package.php"><b>ดูแพ็กเกจอื่น ๆ เพิ่มเติม</b></a>
+        <a class="text-uppercase text-secondary" href="ad-all-package.php"><b>ดูแพ็กเกจอื่น ๆ เพิ่มเติม</b></a>
       </div>
     </section>
     <!-- Footer-->
@@ -181,9 +170,9 @@ if($result = mysqli_query($con,$sql)){
       });
     </script>
     <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/front.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/front.js"></script>
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </body>

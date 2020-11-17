@@ -20,8 +20,15 @@ if(isset($_POST['login'])){
 		window.location = 'login.php';
 		</script>";
 	}else{
-			$_SESSION['email'] = $objResult['email'];
+		$_SESSION['email'] = $objResult['email'];
+
+		if( $objResult['role'] != 1 ){
+			$_SESSION['admin'] = false;
 			header("location:index.php");		
+		}else{
+			$_SESSION['admin'] = true;
+			header("Location:admin/ad-all-package.php");
+		}
 	}
 	mysqli_close($con);
 }

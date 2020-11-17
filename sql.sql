@@ -7,6 +7,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `searchPackage`(IN `search` VARCHAR(
     FROM `tbpacktour` t
     INNER JOIN tbplanning p
     ON p.ref_pktourid = t.pktourid
-	WHERE pktourid LIKE kw OR pktourname LIKE kw OR pkdetail LIKE kw OR unitprice LIKE kw OR datestart LIKE kw;
+	WHERE pkstatus = 1 AND (pktourid LIKE kw OR pktourname LIKE kw OR pkdetail LIKE kw OR unitprice LIKE kw OR datestart LIKE kw);
 
 END

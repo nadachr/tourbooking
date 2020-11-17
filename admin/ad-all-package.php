@@ -1,7 +1,11 @@
 <?php 
 
 session_start();
-include 'condb.php';
+if($_SESSION['admin']==false){
+  header("Location: ../index.php");
+  exit();
+}
+include '../condb.php';
 
 $north = countSect($con, 001);
 $northeast = countSect($con, 002);
@@ -58,20 +62,20 @@ function tourShow($sectid, $kw){
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ระบบจองแพ็คเกจการท่องเที่ยวออนไลน์ | ตระกร้าการจอง</title>
+    <title>ระบบจองแพ็คเกจการท่องเที่ยวออนไลน์ | แพ็คเกจทัวร์ทั้งหมด</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css">
     <!-- Google fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,800&amp;display=swap">
+    <link rel="stylesheet" href="../https://fonts.googleapis.com/css?family=Work+Sans:300,400,800&amp;display=swap">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="../css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/icon.png">
+    <link rel="shortcut icon" href="../img/icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -82,33 +86,19 @@ function tourShow($sectid, $kw){
     <header class="header">
       <nav class="navbar navbar-expand-lg fixed-top" style="position: relative;">
         <div class="container">
-          <a class="navbar-brand" href="index.php" style="font-size: 30px;" id=""><b>ระบบจองแพ็คเกจการท่องเที่ยว</b></a>
+          <a class="navbar-brand" href="ad-all-package.php" style="font-size: 30px; color:#fbd214;" id=""><b>การจัดการระบบจองแพ็คเกจการท่องเที่ยว</b></a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="index.php#book">การจอง</a></li>
-              <li class="nav-item"><a class="nav-link link-scroll" href="payment.php">แจ้งชำระเงิน</a></li>
-              <?php if($_SESSION['email'] != '' && $_SESSION['admin'] == false){ ?>
+              <li class="nav-item"><a class="nav-link link-scroll active" href="ad-all-package.php">จัดการแพ็คเกจ <span class="sr-only">(current)</span></a></li>
+              <?php if($_SESSION['email'] != ''){ ?>
                 <li class="nav-item">
                   <div class="dropdown show">
-                    <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <?= $_SESSION['email'];?>
+                    <button class="nav-link link-scroll btn btn-secondary dropdown-toggle" style="color: #fbd214;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      administrator
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
-                    </div>
-                  </div>
-                </li>
-              <?php }else if($_SESSION['email'] != '' && $_SESSION['admin'] == true){ ?>
-                <li class="nav-item">
-                  <div class="dropdown show">
-                    <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <?= $_SESSION['email'];?>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="admin/ad-all-package.php"><strong>ADMIN PANEL</strong></a>
-                      <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
+                      <a class="dropdown-item" href="../logout.php">ออกจากระบบ</a>
                     </div>
                   </div>
                 </li>
@@ -124,32 +114,32 @@ function tourShow($sectid, $kw){
     <section class="bg-light" id="rent" style="padding-top: 60px; padding-bottom: 50px;">
       <div class="container">
         <header class="mb-4 pb-4">
-          <a href="all-package.php" style="color:#2E3349;"><h2 class="text-uppercase lined"><i class="fas fa-map-marked-alt fa-2x mb-4"></i> แพ็คเกจทัวร์ทั้งหมด</h2></a>
+          <a href="ad-all-package.php" style="color:#2E3349;"><h2 class="text-uppercase lined"><i class="fas fa-map-marked-alt fa-2x mb-4"></i> แพ็คเกจทัวร์ทั้งหมด</h2></a>
         </header>
         <div class="row">
           <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <a class="px-4 py-5 text-center contact-item shadow-sm d-block reset-anchor" href="all-package.php?sect=004">
+            <a class="px-4 py-5 text-center contact-item admin shadow-sm d-block reset-anchor" href="ad-all-package.php?sect=004">
               <h4 class="contact-item-title text-uppercase">ภาคกลาง</h4>
               &nbsp;<span class="contact-item-title h2 text-success"><?= $middle?></span>
               <h4 class="contact-item-title page-header mb-0"><small>แพ็คเกจ</small></h4>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <a class="px-4 py-5 text-center contact-item shadow-sm d-block reset-anchor" href="all-package.php?sect=006">
+            <a class="px-4 py-5 text-center contact-item admin shadow-sm d-block reset-anchor" href="ad-all-package.php?sect=006">
               <h4 class="contact-item-title text-uppercase">ภาคใต้</h4>
               &nbsp;<span class="contact-item-title h2 text-success"><?= $south?></span>
               <h4 class="contact-item-title page-header mb-0"><small>แพ็คเกจ</small></h4>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <a class="px-4 py-5 text-center contact-item shadow-sm d-block reset-anchor" href="all-package.php?sect=001">
+            <a class="px-4 py-5 text-center contact-item admin shadow-sm d-block reset-anchor" href="ad-all-package.php?sect=001">
               <h4 class="contact-item-title text-uppercase">ภาคเหนือ</h4>
               &nbsp;<span class="contact-item-title h2 text-success"><?= $north?></span>
               <h4 class="contact-item-title page-header mb-0"><small>แพ็คเกจ</small></h4>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <a class="px-4 py-5 text-center contact-item shadow-sm d-block reset-anchor" href="all-package.php?sect=002">
+            <a class="px-4 py-5 text-center contact-item admin shadow-sm d-block reset-anchor" href="ad-all-package.php?sect=002">
               <h4 class="contact-item-title text-uppercase">ภาคอีสาน</h4>
               &nbsp;<span class="contact-item-title h2 text-success"><?= $northeast?></span>
               <h4 class="contact-item-title page-header mb-0"><small>แพ็คเกจ</small></h4>
@@ -157,8 +147,8 @@ function tourShow($sectid, $kw){
           </div>
         </div>
         <div class="row">
-          <div class="col-2"></div>
-          <div class="col-md-8 mt-5">
+          <div class="col-1"></div>
+          <div class="col-md-7 mt-5">
             <form action="" method="POST">
               <div class="input-group mb-2 mr-sm-2">
                 <input class="form-control" id="search" name="kw" placeholder="ชื่อแพ็คเกจ หรือจังหวัดที่ต้องการ" type="text">
@@ -167,6 +157,9 @@ function tourShow($sectid, $kw){
                 </div>
               </div>
             </form>
+          </div>
+          <div class="col-3 mt-5">
+            <a href="ad-add-package.php" class="btn btn-success"><i class="fas fa-plus"></i> เพิ่มแพ็คเกจการท่องเที่ยว</a>
           </div>
         </div>
       </div>
@@ -177,26 +170,38 @@ function tourShow($sectid, $kw){
         <table class="table table-hover table-bordered">
           <thead align="center">
             <tr>
-              <th width="30%">รูปประกอบ</th>
-              <th width="35%">ชื่อแพ็คเกจ</th>
+              <th width="25%">รูปประกอบ</th>
+              <th width="30%">ชื่อแพ็คเกจ</th>
               <th>วันเดินทาง</th>
               <th>ราคา (บาท/คน)</th>
               <th>ที่ว่าง (คน)</th>
+              <th>การจอง</th>
+              <th>ลบแพ็คเกจ</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach($result as $row){ ?>
             <tr align="center">
-              <td><a href="package.php?id=<?= $row['pktourid'];?>"><img class="pack-list" src="img/tour/<?= $row['pkpicture']?>" alt=""></a></td>
+              <td><a href="ad-package.php?id=<?= $row['pktourid'];?>"><img class="pack-list" src="../img/tour/<?= $row['pkpicture']?>" alt=""></a></td>
               <td align="left">
-                <a href="package.php?id=<?= $row['pktourid'];?>" class="text-dark">
+                <a href="ad-package.php?id=<?= $row['pktourid'];?>" class="text-dark">
                   <h5><?= $row['pktourname'];?></h5>
                   <p><?= $row['pkdetail']?></p>
                 </a>
               </td>
               <td><?= $row['dstart']?></td>
-              <td class="h4"><?= $row['price']?></td>
+              <td><?= $row['price']?></td>
               <td><?= $row['numFree']?></td>
+              <td>
+                <?php if($row['numBooking'] == 0) {?>
+                  <a href="ad-booking.php?id=<?= $row['pktourid']?>" class="btn btn-info disabled"><i class="fas fa-cart-arrow-down"></i></a>&nbsp;
+                <?php }else{ ?>
+                  <a href="ad-booking.php?id=<?= $row['pktourid']?>" class="btn btn-info"><i class="fas fa-cart-arrow-down"></i></a>&nbsp;
+                <?php } ?>
+              </td>
+              <td>
+                <a href="delete.php?id=<?= $row['pktourid']?>" class="btn btn-danger" onclick="return confirm('ต้องการลบแพ็คเกจนี้ทิ้งหรือไม่')"><i class="fas fa-trash-alt"></i></a>&nbsp;
+              </td>
             </tr>
             <?php } ?>
           </tbody>
@@ -220,9 +225,9 @@ function tourShow($sectid, $kw){
       </div>
     </footer>
     <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/front.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/front.js"></script>
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </body>

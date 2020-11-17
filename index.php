@@ -69,13 +69,25 @@ if($result = mysqli_query($con,$sql)){
               <li class="nav-item"><a class="nav-link link-scroll active" href="#hero">หน้าแรก <span class="sr-only">(current)</span></a></li>
               <li class="nav-item"><a class="nav-link link-scroll" href="#book">การจอง</a></li>
               <li class="nav-item"><a class="nav-link link-scroll" href="payment.php">แจ้งชำระเงิน</a></li>
-              <?php if($_SESSION['email'] != ''){ ?>
+              <?php if($_SESSION['email'] != '' && $_SESSION['admin'] == false){ ?>
                 <li class="nav-item">
                   <div class="dropdown show">
                     <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <?= $_SESSION['email'];?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
+                    </div>
+                  </div>
+                </li>
+              <?php }else if($_SESSION['email'] != '' && $_SESSION['admin'] == true){ ?>
+                <li class="nav-item">
+                  <div class="dropdown show">
+                    <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <?= $_SESSION['email'];?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="admin/ad-all-package.php"><strong>ADMIN PANEL</strong></a>
                       <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
                     </div>
                   </div>

@@ -47,16 +47,32 @@
               <li class="nav-item"><a class="nav-link link-scroll" href="index.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
               <li class="nav-item"><a class="nav-link link-scroll" href="index.php#book">การจอง</a></li>
               <li class="nav-item"><a class="nav-link link-scroll active" href="payment.php">แจ้งชำระเงิน</a></li>
-              <li class="nav-item">
-                <div class="dropdown show">
-                  <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?= $_SESSION['email'];?>
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
+              <?php if($_SESSION['email'] != '' && $_SESSION['admin'] == false){ ?>
+                <li class="nav-item">
+                  <div class="dropdown show">
+                    <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <?= $_SESSION['email'];?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              <?php }else if($_SESSION['email'] != '' && $_SESSION['admin'] == true){ ?>
+                <li class="nav-item">
+                  <div class="dropdown show">
+                    <button class="nav-link link-scroll btn btn-primary dropdown-toggle" style="color: #003B49;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <?= $_SESSION['email'];?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="admin/ad-all-package.php"><strong>ADMIN PANEL</strong></a>
+                      <a class="dropdown-item" href="logout.php">ออกจากระบบ</a>
+                    </div>
+                  </div>
+                </li>
+              <?php }else{ ?>
+              <li class="nav-item"><a class="nav-link link-scroll btn btn-primary" style="color: #003B49;" href="login.php">เข้าสู่ระบบ</a></li>
+              <?php } ?>
             </ul>
           </div>
         </div>
@@ -108,11 +124,10 @@
                       <div class="col-sm-8">
                         <select class="custom-select" name="bank">
                           <option selected>เลือกธนาคารที่ชำระเงิน</option>
-                          <option value="1">กรุงไทย</option>
-                          <option value="2">กรุงศรี</option>
-                          <option value="3">กสิกร</option>
-                          <option value="4">ออมสิน</option>
-                          <option value="5">อื่นๆ</option>
+                          <option value="กรุงไทย">กรุงไทย</option>
+                          <option value="กรุงศรี">กรุงศรี</option>
+                          <option value="กสิกร">กสิกร</option>
+                          <option value="ออมสิน">ออมสิน</option>
                         </select>
                       </div>
                     </div>
@@ -126,7 +141,6 @@
                       <label class="col-sm-4 col-form-label">หลักฐานการชำระเงิน</label>
                       <div class="col-sm-8">
                         <div class="custom-file">
-                          <!-- <input type="file" class="form-control-file" name="file" id="customFile"> -->
                           <input type="file" class="custom-file-input" name="customFile" id="customFile">
                           <label class="custom-file-label" for="customFile" name="customFile" id="file"></label>
                         </div>
