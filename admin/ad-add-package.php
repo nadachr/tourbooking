@@ -1,6 +1,9 @@
 <?php 
 
-  session_start();
+if($_SESSION['admin']==false){
+  header("Location: ../index.php");
+  exit();
+}
   include '../condb.php';
 
   if(isset($_GET['id'])){
@@ -62,9 +65,6 @@
     <link href="dist/css/bootstrap-datepicker.css" rel="stylesheet" />
     <script src="dist/js/bootstrap-datepicker-custom.js"></script>
     <script src="dist/locales/bootstrap-datepicker.th.min.js" charset="UTF-8"></script>
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
   </head>
   <body>
     <!-- navbar-->
@@ -211,7 +211,7 @@
                   </div>
                   <div class="row">
                     <div class="col-12" align="center">
-                      <input type="submit" name="add" class="btn btn-success btn-lg font-weight-bold" value="ยืนยันการเพิ่มแพ็คเกจ">
+                      <input type="submit" name="add" class="btn btn-success btn-lg font-weight-bold" onclick="return confirm('ยืนยันการเพิ่มแพ็คเกจหรือไม่')" value="ยืนยันการเพิ่มแพ็คเกจ">
                     </div>
                   </div>
                 </div>
@@ -330,7 +330,7 @@
                     </div>
                     <div class="row">
                       <div class="col-12" align="center">
-                        <input type="submit" name="edit" class="btn btn-warning btn-lg font-weight-bold" value="ยืนยันการแก้ไขแพ็คเกจ">
+                        <input type="submit" name="edit" class="btn btn-warning btn-lg font-weight-bold" onclick="return confirm('ยืนยันการแก้ไขแพ็คเกจหรือไม่')" value="ยืนยันการแก้ไขแพ็คเกจ">
                       </div>
                     </div>
                   </div>

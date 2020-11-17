@@ -2,7 +2,10 @@
 
 session_start();
   include '../condb.php';
-
+  if($_SESSION['admin']==false){
+    header("Location: ../index.php");
+    exit();
+  }
   if(isset($_GET['id'])){
     $tourid = $_GET['id'];
   }

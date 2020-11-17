@@ -45,22 +45,18 @@
                         if($insert2){
                             foreach($insert2 as $row){
                                 $tourid = $row['pktourid'];
-                            };
+                            }
 
                             $sql3 = "INSERT INTO `tbplanning` (`planno`, `ref_pktourid`, `dateStart`, `dateEnd`, `numSeat`, `numBooking`, `dateDue`, `status`) VALUES (NULL, '$tourid', '$start', '$end', '$seat', '0', '$due', '1');";
-                            $insert3 = mysqli_query($con, $sql2);
+                            $insert3 = mysqli_query($con, $sql3);
                             
-                            header("Location: ad-package.php?id=$tourid");
+                            if($insert3){
+                                header("Location: ad-package.php?id=$tourid");
+                            }else echo "INSERT INTO `tbplanning` (`planno`, `ref_pktourid`, `dateStart`, `dateEnd`, `numSeat`, `numBooking`, `dateDue`, `status`) VALUES (NULL, '$tourid', '$start', '$end', '$seat', '0', '$due', '1');";
                         }else{
                             echo "SELECT tktourid FROM tbpacktour WHERE pktourname = '$name' LIMIT 1";
                         }
                     }
-
-                    // if(move_uploaded_file($_FILES['customFile']['tmp_name'], $target)){
-                    //     $msg = "Image uploaded successfully";
-                    // }else{
-                    //     $msg = "There was a problem uploading image";
-                    // }
             
                 }else{
                     echo "ไฟล์มีขนาดใหญ่เกินไป";

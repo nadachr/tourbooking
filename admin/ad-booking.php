@@ -1,8 +1,10 @@
 <?php
 
-include '../auth.php';
 include '../condb.php';
-
+if($_SESSION['admin']==false){
+  header("Location: ../index.php");
+  exit();
+}
 if(isset($_GET['id'])){
   $id = $_GET['id'];
 }else header("Location: ad-all-package.php");
